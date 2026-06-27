@@ -60,65 +60,13 @@ body {
   overflow: hidden;
 }
 
-/* collage replaces single hero-bg */
-.hero-collage {
+.hero-bg {
   position: absolute;
   inset: 0;
-  overflow: hidden;
-}
-.hero-collage::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(14,11,20,0.55);
-  z-index: 1;
-}
-.collage-photo {
-  position: absolute;
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.7);
-  will-change: transform;
-}
-.collage-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: saturate(0.75) brightness(0.9);
-}
-
-/* photo positions — portrait frames, asymmetric layout */
-.collage-photo:nth-child(1) {
-  width: 28vw; height: 42vw;
-  top: -4%; left: 4%;
-  transform: rotate(-4deg);
-  z-index: 0;
-}
-.collage-photo:nth-child(2) {
-  width: 32vw; height: 48vw;
-  top: -8%; left: 24%;
-  transform: rotate(1.5deg);
-  z-index: 2;
-}
-.collage-photo:nth-child(3) {
-  width: 26vw; height: 38vw;
-  top: 5%; left: 52%;
-  transform: rotate(-2deg);
-  z-index: 1;
-}
-.collage-photo:nth-child(4) {
-  width: 22vw; height: 33vw;
-  top: -2%; right: 2%;
-  transform: rotate(3.5deg);
-  z-index: 0;
-}
-/* mobile: hide side photos, keep center two */
-@media (max-width: 640px) {
-  .collage-photo:nth-child(1) { display: none; }
-  .collage-photo:nth-child(4) { display: none; }
-  .collage-photo:nth-child(2) { width: 55vw; height: 80vw; left: 5%; }
-  .collage-photo:nth-child(3) { width: 45vw; height: 65vw; left: auto; right: 2%; top: 8%; }
+  background-image: url('photos/36e415c9-55be-49d2-8229-c467493c4181.jpg');
+  background-size: cover;
+  background-position: center center;
+  filter: saturate(0.7) brightness(0.45);
 }
 
 .hero-gradient {
@@ -533,12 +481,7 @@ body {
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-collage">
-    <div class="collage-photo"><img src="photos/bd398ff1-1c4d-430d-89a1-0709cb501055.jpg" alt="JAX cosplay"></div>
-    <div class="collage-photo"><img src="photos/fe2d804f-8591-45a4-8fef-a5dc39ef56ee.jpg" alt="Andrealphus cosplay"></div>
-    <div class="collage-photo"><img src="photos/0fa0cbfd-d039-46e3-b9c7-c5604e34c821.jpg" alt="Lest cosplay"></div>
-    <div class="collage-photo"><img src="photos/3e74c61f-2bd9-4fe5-b74d-bcd52e836c6a.jpg" alt="Stolas cosplay"></div>
-  </div>
+  <div class="hero-bg"></div>
   <div class="hero-gradient"></div>
 
   <nav class="hero-nav">
