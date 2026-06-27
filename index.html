@@ -320,6 +320,36 @@ body {
   line-height: 1.75;
   margin-top: 0.75rem;
 }
+.wedding-credits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--accent-dim);
+}
+.wedding-credits-group { min-width: 140px; }
+.wedding-credit-role {
+  font-family: system-ui, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--silver-dim);
+}
+.wedding-credit-name {
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: var(--silver);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.wedding-credit-name:hover { color: var(--accent); }
+.wedding-credits-ph {
+  width: 100%;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(46,31,82,0.4);
+  margin-top: 0.25rem;
+}
 .wedding-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -533,6 +563,36 @@ body {
     <div class="label">Featured shoot</div>
     <h2 class="section-title" style="margin-top:0.5rem">Stolitz Wedding</h2>
     <p>A full narrative shoot reimagining Stolas and Blitzo from Helluva Boss in a wedding sequence — 27 images, shot April 2026.</p>
+    <div class="wedding-credits">
+      <div class="wedding-credits-group">
+        <div class="wedding-credit-role">Bride Stolas</div>
+        <a href="https://www.instagram.com/ciufflegend/" class="wedding-credit-name" target="_blank" rel="noopener">@ciufflegend</a>
+      </div>
+      <div class="wedding-credits-group">
+        <div class="wedding-credit-role">Groom Blitzø</div>
+        <a href="https://www.instagram.com/bianchinacosplay/" class="wedding-credit-name" target="_blank" rel="noopener">@bianchinacosplay</a>
+      </div>
+      <div class="wedding-credits-group">
+        <div class="wedding-credit-role">Octavia</div>
+        <a href="https://www.instagram.com/holygrailcosplay/" class="wedding-credit-name" target="_blank" rel="noopener">@holygrailcosplay</a>
+      </div>
+      <div class="wedding-credits-group">
+        <div class="wedding-credit-role">Loona</div>
+        <a href="https://www.instagram.com/zales_starlight/" class="wedding-credit-name" target="_blank" rel="noopener">@zales_starlight</a>
+      </div>
+      <div class="wedding-credits-group">
+        <div class="wedding-credit-role">Father Lucifer</div>
+        <a href="https://www.instagram.com/nives.sela/" class="wedding-credit-name" target="_blank" rel="noopener">@nives.sela</a>
+      </div>
+      <div class="wedding-credits-group">
+        <div class="wedding-credit-role">Fizzarolli</div>
+        <a href="https://www.instagram.com/yume.cos._/" class="wedding-credit-name" target="_blank" rel="noopener">@yume.cos._</a>
+      </div>
+      <div class="wedding-credits-group wedding-credits-ph">
+        <div class="wedding-credit-role">Photography</div>
+        <a href="https://www.instagram.com/rossella_photoart/" class="wedding-credit-name" target="_blank" rel="noopener">@rossella_photoart</a>
+      </div>
+    </div>
   </div>
   <div class="wedding-grid" id="weddingGrid"></div>
 </section>
