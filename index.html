@@ -1,0 +1,755 @@
+<title>ciufflegend — Cosplay Portfolio</title>
+<meta name="description" content="Cosplay portfolio of Daniel (@ciufflegend) — character work spanning League of Legends, Arcane, Helluva Boss and beyond.">
+
+<style>
+/* ── tokens ── */
+:root {
+  --ink:        #0e0b14;
+  --ink-mid:    #1e1829;
+  --ground:     #f7f4f0;
+  --accent:     #7c5cbf;
+  --accent-dim: #2e1f52;
+  --accent-pale:#e8e2f5;
+  --silver:     #c9c3d4;
+  --silver-dim: #6b6278;
+  --white:      #ffffff;
+}
+
+/* ── reset / base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--ground);
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 17px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── typography ── */
+.sans {
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+}
+.label {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.label-silver {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--silver-dim);
+}
+
+/* ── hero ── */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 0 4rem 0;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('http://192.168.1.162:2283/api/assets/aa7f4d17-5d9f-43f5-903b-8cbd4c5ebda9/thumbnail?size=preview');
+  background-size: cover;
+  background-position: center top;
+  filter: saturate(0.7) brightness(0.45);
+  transform: scale(1.04);
+  transition: transform 8s ease;
+}
+.hero:hover .hero-bg { transform: scale(1.0); }
+
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(14,11,20,0.2) 40%,
+    rgba(14,11,20,0.88) 75%,
+    var(--ink) 100%
+  );
+}
+
+.hero-nav {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 2rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+.hero-nav a {
+  color: var(--silver);
+  text-decoration: none;
+  font-family: system-ui, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.hero-nav a:hover { color: var(--white); }
+.nav-links { display: flex; gap: 2.5rem; }
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  padding: 0 3rem;
+  max-width: 900px;
+}
+.hero-eyebrow {
+  margin-bottom: 1rem;
+}
+.hero-name {
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  color: var(--white);
+}
+.hero-name em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero-sub {
+  margin-top: 1.5rem;
+  font-family: system-ui, sans-serif;
+  font-size: 1rem;
+  color: var(--silver);
+  max-width: 42ch;
+  line-height: 1.7;
+}
+.hero-cta {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.8rem;
+  font-family: system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--white);
+  border: 1.5px solid var(--accent);
+}
+.btn-primary:hover { background: #9070d8; border-color: #9070d8; }
+.btn-ghost {
+  background: transparent;
+  color: var(--silver);
+  border: 1.5px solid var(--silver-dim);
+}
+.btn-ghost:hover { color: var(--white); border-color: var(--white); }
+
+/* ── section scaffold ── */
+.section {
+  padding: 5rem 3rem;
+}
+.section-header {
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+}
+.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  text-wrap: balance;
+  color: var(--white);
+}
+.section-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--accent-dim);
+  opacity: 0.6;
+}
+
+/* ── named cosplays: featured row ── */
+.featured-section {
+  background: var(--ink);
+  padding: 5rem 3rem;
+}
+.cosplay-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.cosplay-card {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.cosplay-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.4s;
+  filter: saturate(0.85);
+}
+.cosplay-card:hover img {
+  transform: scale(1.05);
+  filter: saturate(1.1);
+}
+.cosplay-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(14,11,20,0.85) 0%, transparent 55%);
+  pointer-events: none;
+}
+.cosplay-card-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1.5rem 1.25rem 1.25rem;
+}
+.cosplay-card-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+}
+.cosplay-card-meta {
+  margin-top: 0.35rem;
+  font-family: system-ui, sans-serif;
+  font-size: 0.72rem;
+  color: var(--silver);
+  letter-spacing: 0.06em;
+}
+/* multi-photo card stack */
+.cosplay-card[data-count]::after {
+  content: attr(data-count);
+  position: absolute;
+  top: 0.75rem; right: 0.75rem;
+  background: rgba(14,11,20,0.7);
+  color: var(--silver);
+  font-family: system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.55rem;
+  border-radius: 1px;
+}
+
+/* ── gallery grid (favorites) ── */
+.gallery-section {
+  background: var(--ink-mid);
+}
+.masonry {
+  columns: 3;
+  column-gap: 0.75rem;
+}
+@media (max-width: 900px) { .masonry { columns: 2; } }
+@media (max-width: 520px) { .masonry { columns: 1; } }
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.masonry-item img {
+  width: 100%;
+  display: block;
+  transition: transform 0.45s ease, filter 0.3s;
+  filter: saturate(0.8);
+}
+.masonry-item:hover img {
+  transform: scale(1.04);
+  filter: saturate(1.1) brightness(1.05);
+}
+.masonry-item-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(14,11,20,0.7) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.masonry-item:hover .masonry-item-overlay { opacity: 1; }
+.masonry-item-label {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  font-family: system-ui, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--silver);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.masonry-item:hover .masonry-item-label { opacity: 1; }
+
+/* ── Stolitz Wedding — dedicated section ── */
+.wedding-section {
+  background: var(--ink);
+  padding: 6rem 3rem;
+}
+.wedding-intro {
+  max-width: 55ch;
+  margin-bottom: 3.5rem;
+}
+.wedding-intro p {
+  font-family: system-ui, sans-serif;
+  font-size: 0.95rem;
+  color: var(--silver);
+  line-height: 1.75;
+  margin-top: 0.75rem;
+}
+.wedding-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+@media (max-width: 900px) { .wedding-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 600px) { .wedding-grid { grid-template-columns: repeat(2, 1fr); } }
+.wedding-grid .w-span2 {
+  grid-column: span 2;
+}
+.wedding-cell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.wedding-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+  aspect-ratio: 3/4;
+}
+.wedding-cell.landscape img { aspect-ratio: 4/3; }
+.wedding-cell:hover img { transform: scale(1.04); }
+/* accent tint on first cell */
+.wedding-cell:first-child::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(124,92,191,0.25) 0%, transparent 60%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── lightbox ── */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,7,18,0.96);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+.lightbox.open { display: flex; }
+.lightbox img {
+  max-width: 92vw;
+  max-height: 92vh;
+  object-fit: contain;
+  border-radius: 2px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+}
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem; right: 2rem;
+  background: none;
+  border: none;
+  color: var(--silver);
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.lightbox-close:hover { color: var(--white); }
+.lightbox-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(14,11,20,0.6);
+  border: none;
+  color: var(--silver);
+  font-size: 1.5rem;
+  padding: 1rem 0.8rem;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.lightbox-nav:hover { color: var(--white); background: rgba(14,11,20,0.9); }
+.lightbox-nav:focus-visible { outline: 2px solid var(--accent); }
+.lightbox-prev { left: 0.75rem; }
+.lightbox-next { right: 0.75rem; }
+.lightbox-caption {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%; transform: translateX(-50%);
+  font-family: system-ui, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--silver-dim);
+  white-space: nowrap;
+}
+
+/* ── footer ── */
+.footer {
+  background: var(--ink);
+  border-top: 1px solid var(--accent-dim);
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.footer-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+}
+.footer-handle {
+  font-family: system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--silver-dim);
+  margin-top: 0.2rem;
+}
+.footer-links {
+  display: flex;
+  gap: 2rem;
+}
+.footer-links a {
+  font-family: system-ui, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--silver-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--accent); }
+
+/* ── reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg, .cosplay-card img, .masonry-item img, .wedding-cell img { transition: none; }
+}
+</style>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-gradient"></div>
+
+  <nav class="hero-nav">
+    <span class="label" style="color:var(--silver)">ciufflegend</span>
+    <div class="nav-links">
+      <a href="#characters">Characters</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#stolitz">Stolitz Wedding</a>
+    </div>
+  </nav>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow label">Cosplayer &amp; character performer</div>
+    <h1 class="hero-name">Daniel<br><em>ciuff</em>legend</h1>
+    <p class="hero-sub">
+      Italian cosplayer. From the demon halls of Helluva Boss to the neon streets of Arcane —
+      every character worn with intention.
+    </p>
+    <div class="hero-cta">
+      <a href="https://www.instagram.com/ciufflegend/" class="btn btn-primary" target="_blank" rel="noopener">Instagram</a>
+      <a href="#gallery" class="btn btn-ghost">See the work</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAMED CHARACTERS -->
+<section class="featured-section" id="characters">
+  <div class="section-header">
+    <h2 class="section-title">Characters</h2>
+    <div class="section-rule"></div>
+    <span class="label-silver">named cosplays</span>
+  </div>
+  <div class="cosplay-cards" id="characterCards"></div>
+</section>
+
+<!-- FULL GALLERY -->
+<section class="gallery-section section" id="gallery">
+  <div class="section-header">
+    <h2 class="section-title">Gallery</h2>
+    <div class="section-rule"></div>
+    <span class="label-silver">selected shots</span>
+  </div>
+  <div class="masonry" id="masonryGrid"></div>
+</section>
+
+<!-- STOLITZ WEDDING -->
+<section class="wedding-section" id="stolitz">
+  <div class="wedding-intro">
+    <div class="label">Featured shoot</div>
+    <h2 class="section-title" style="margin-top:0.5rem">Stolitz Wedding</h2>
+    <p>A full narrative shoot reimagining Stolas and Blitzo from Helluva Boss in a wedding sequence — 27 images, shot April 2026.</p>
+  </div>
+  <div class="wedding-grid" id="weddingGrid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div>
+    <div class="footer-name">Daniel</div>
+    <div class="footer-handle">@ciufflegend</div>
+  </div>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/ciufflegend/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.threads.com/@ciufflegend" target="_blank" rel="noopener">Threads</a>
+    <a href="https://www.twitch.tv/ciufflegend" target="_blank" rel="noopener">Twitch</a>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lightbox-close" id="lbClose" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous">&#8249;</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Next">&#8250;</button>
+  <div class="lightbox-caption" id="lbCaption"></div>
+</div>
+
+<script>
+const BASE = 'http://192.168.1.162:2283';
+const API_KEY = 'J5Ni8vTRSTXud9hcIXoDUkUYmorb4pOvBJHjRGHkM';
+
+function thumb(id) { return `${BASE}/api/assets/${id}/thumbnail?size=preview`; }
+function fullUrl(id) { return `${BASE}/api/assets/${id}/original`; }
+function immichUrl(id) { return `${BASE}/photos/${id}`; }
+
+// ── data ──
+const named = [
+  {
+    name: 'JAX',
+    fandom: 'League of Legends',
+    ids: [
+      'aa7f4d17-5d9f-43f5-903b-8cbd4c5ebda9',
+      '57a19124-731e-4057-9b26-fb8467197d08',
+      'bd398ff1-1c4d-430d-89a1-0709cb501055',
+      'a76951a3-e1a8-4485-95a2-dc35822f14f5',
+    ],
+    cover: 'aa7f4d17-5d9f-43f5-903b-8cbd4c5ebda9',
+    photographer: 'nashtory',
+  },
+  {
+    name: 'Lest',
+    fandom: 'Arcane',
+    ids: [
+      '0fa0cbfd-d039-46e3-b9c7-c5604e34c821',
+      'e89503db-5d4a-452c-bd84-6622adab360b',
+    ],
+    cover: '0fa0cbfd-d039-46e3-b9c7-c5604e34c821',
+    photographer: 'mellow_af',
+  },
+  {
+    name: 'Stolas — Loo Loo Land',
+    fandom: 'Helluva Boss',
+    ids: [
+      '3e74c61f-2bd9-4fe5-b74d-bcd52e836c6a',
+      'da4c11f4-d674-4715-a1b9-96c38269a4c1',
+    ],
+    cover: '3e74c61f-2bd9-4fe5-b74d-bcd52e836c6a',
+    photographer: 'mellow_af',
+  },
+  {
+    name: 'Andrealphus',
+    fandom: 'Helluva Boss',
+    ids: [
+      'fe2d804f-8591-45a4-8fef-a5dc39ef56ee',
+      'e1e208ea-6836-46b5-9cde-e0509afbc1ad',
+      '2bf1756f-de07-48cb-aa19-f1e2e5219028',
+    ],
+    cover: 'fe2d804f-8591-45a4-8fef-a5dc39ef56ee',
+    photographer: 'ale ferro ph',
+  },
+];
+
+// All favorites except Stolitz Wedding and named (already in character section)
+const namedIds = new Set(named.flatMap(n => n.ids));
+const stolitzIds = [
+  'c263412d-9415-4a06-b443-c3da7b0aa7e3','e7270a9e-295e-4ca0-828a-2a289f9dd061',
+  'b46cdf39-7f6a-4b53-ae2e-b54edf28c807','ab46d721-42ba-43f8-86b3-e2226fe68128',
+  'be2aeb91-a5ba-4214-a9fa-57bfadece95b','fa54ba59-b0f0-47fe-86f5-5ff1f4556878',
+  '767a61e9-85c4-4ee5-aca8-2ac7f819b6a8','aeb73cac-84ea-4231-b2bc-07324d2250b4',
+  '546bd854-16c1-4d74-a97a-9128ded296da','cb0ed0e7-a68e-42b3-8810-d46345d8c727',
+  '7499b4c9-9652-40dc-a303-69b8cdce02a2','8fdc2866-a7d6-4ec9-88b3-d113563234ee',
+  '1f9956c9-bcbe-4fc7-acd5-5283449f4901','19e43bf7-8479-4b75-9fed-bb9b2e378755',
+  '6663e49f-e265-415a-a620-bf5868a495bf','e216791e-22c3-4c6b-b6f6-33079e7cd08a',
+  '6797bd13-aabe-4a19-b7e6-73fd11b3ae9c','69451e36-511b-45fe-8d6e-22c2d49e6a7f',
+  'ea1d9eae-c38e-432d-abc4-4df088275ddb','8a9e080c-2c5d-4384-9371-ae086271f727',
+  'b6035d97-59db-422c-9457-b5f19ed3f4dd','8eb2d102-aebc-4a14-89fa-9f7f358cd585',
+  '0736aa33-6b18-4fd0-a501-3ee1ccfdc388','2e93b7c5-167c-4c53-af8c-be414a7b2146',
+  'fdd2529d-0c43-4c91-9ec5-fcfa1dd7862b','4db3198d-b5f2-46f8-a7d9-db83f9e99676',
+  'c957617f-7e21-45de-8eec-be6b0ce0845a',
+];
+const stolitzSet = new Set(stolitzIds);
+
+const galleryIds = [
+  'c0446b26-9663-44c6-a786-ca7e43622cbc','e898ac0f-a2a2-460b-be9d-31dcfc3b52a2',
+  'a0b5d0a9-edd2-48c1-aaaa-f7de91a85eec','b714aebe-9db1-4c4b-986a-0e72255ecccf',
+  '4fa1a514-e4d2-4436-a3ab-e918f1214f53','64f396fe-2b5c-4b52-a363-fa0cb69e0d1d',
+  'ca391a56-b890-4659-add3-55ee29555a44','020c4106-3854-4e00-b0bf-2557af2e0550',
+  '73748444-2b3f-4b8a-b01a-d3faa1267b4d','369b6b4e-3f16-4624-9421-62b1f9718f87',
+  'f2df60ad-cc75-4709-93be-99d68994feb0','a5c1a256-958d-435a-a645-6ab29183b6c8',
+  '8f50c168-404b-4b2b-90f9-72ace80468d1','56c50e7b-69ea-47e2-a871-558e6977ee0c',
+  '79b4f538-9930-49dc-a611-8d5e7900ddef','444e3bbc-d776-4a4e-9add-ddf45196dae9',
+  '3707aa38-2509-44f0-ac94-683201c5d517','9974af43-bb73-49ea-a090-a1d060208088',
+  '7d84d7da-de35-4777-8bb1-f47cac3796c8','67b2a8d6-6dc2-40e9-b7d5-6688993ee9b3',
+  'eadde6c6-2806-4472-8c8c-f28dc3967b54','ad4b318a-d328-48c3-97cd-53913b35422b',
+  'f5393c50-e8ee-4acf-b546-1b144994f1b4','2f881159-b6f5-4c31-b70d-1c79ced8c3a3',
+  '8edbee03-16d5-4def-b3ba-395efb69f255','0ff1c318-7a46-4577-8beb-38854bf7fa16',
+  '219778b8-fe57-4e32-a083-8a8789b7bd31','efa37ae5-e5d2-4526-801c-0f1f1d21452c',
+  '136de677-ec9b-41c4-9fb7-ea4e07be2746','a0c725e8-2d82-480a-a85a-defe828f3c50',
+  'f8b2723e-5624-4d90-b38d-e42fa04831fe','3dd4d4df-e7b1-4479-a4f8-6ed5503e0077',
+  '243cc1bc-a9c5-4031-a55b-0b8ae1560b06','7975a2a9-5850-4800-9465-6c32f8c2e850',
+  '983eda72-7f4b-464a-a388-fe113e55040c','0ca10050-9399-467e-b597-b595901973d1',
+  '7564e261-275e-4221-815d-6513b6fdbb85','ca2081a3-1d93-4f24-8a02-20c9ed7210da',
+  'd95f2c96-c390-4076-a624-c43f3f62a523','0d2202b7-2084-4770-a6bb-f363061ee890',
+  'bc85a8a8-1985-40e3-88c2-d49ceedfd5f4','bd8f04cc-fdbb-4d9f-bc35-4435ff0b266f',
+  'cba46861-6448-47f7-a5e3-f4dd454cc52e','436193e2-86bf-4644-9970-e1c38a8e01f4',
+  '6cae26bd-7ccf-4e81-8c5a-aa2dc55c35ad',
+  '36e415c9-55be-49d2-8229-c467493c4181','a160f74f-69d5-4bb3-8907-2db8ab9cebc5',
+  '93d2ff7b-41b2-4924-928b-a03aec77fd58','8a65d88e-0777-4294-b534-2cd7b6d7a5f3',
+  'db3f9d46-26b3-4a83-ab6a-68f5ab9c59ce','458bc6cb-550b-43f0-8f80-5584814fcae0',
+  '6e123aaf-76b1-4076-b8d3-e4932adf4e65','4c760ba2-daa0-41a4-a81a-8b601961cae0',
+  '9dd2c18e-77b8-4033-a626-df9b74d8e251','bb2b5c59-4aae-495a-925f-25fea0b15556',
+  '62642505-13a3-4098-99e6-3508b3637a59','9d2e76aa-6ba6-4abe-a371-4b558c142f6c',
+  'a6d0b43a-9f03-4257-bdee-a117107692ca','4fa06eb7-c80e-43f7-a1e3-c34cec3e0b16',
+  'a6cd02f3-2fb1-4dff-86aa-476827787a80','b18f0232-337e-4f2d-88aa-26b275e85a76',
+  'f4334ac5-7a01-4635-b1e7-9a2247defb90','5339aaec-a899-4d2c-bf5c-3ea8681dad4e',
+  'fb2b06d8-5656-42ac-a63f-416250978321',
+  '4b8d354b-b4db-4983-82bc-c82ed5645478',
+  '7d166cca-273c-46dc-8b61-160895106870','c8011622-ef0d-427c-b687-d15d4e0c54e9',
+];
+
+// ── lightbox state ──
+let lbImages = [];
+let lbIndex = 0;
+
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCaption = document.getElementById('lbCaption');
+
+function openLightbox(images, index) {
+  lbImages = images;
+  lbIndex = index;
+  showLb();
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function showLb() {
+  const { id, caption } = lbImages[lbIndex];
+  lbImg.src = thumb(id);
+  lbImg.alt = caption || '';
+  lbCaption.textContent = caption || '';
+  document.getElementById('lbPrev').style.display = lbImages.length > 1 ? '' : 'none';
+  document.getElementById('lbNext').style.display = lbImages.length > 1 ? '' : 'none';
+}
+function closeLightbox() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('lbClose').addEventListener('click', closeLightbox);
+lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+document.getElementById('lbPrev').addEventListener('click', e => {
+  e.stopPropagation();
+  lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length;
+  showLb();
+});
+document.getElementById('lbNext').addEventListener('click', e => {
+  e.stopPropagation();
+  lbIndex = (lbIndex + 1) % lbImages.length;
+  showLb();
+});
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') { lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; showLb(); }
+  if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % lbImages.length; showLb(); }
+});
+
+// ── build character cards ──
+const characterCards = document.getElementById('characterCards');
+named.forEach(ch => {
+  const images = ch.ids.map(id => ({ id, caption: `${ch.name} — ${ch.fandom}` }));
+  const card = document.createElement('div');
+  card.className = 'cosplay-card';
+  if (ch.ids.length > 1) card.dataset.count = `${ch.ids.length} photos`;
+  card.innerHTML = `
+    <img src="${thumb(ch.cover)}" alt="${ch.name} cosplay" loading="lazy">
+    <div class="cosplay-card-overlay"></div>
+    <div class="cosplay-card-info">
+      <div class="cosplay-card-name">${ch.name}</div>
+      <div class="cosplay-card-meta">${ch.fandom} · ph. ${ch.photographer}</div>
+    </div>
+  `;
+  card.addEventListener('click', () => openLightbox(images, 0));
+  characterCards.appendChild(card);
+});
+
+// ── build masonry gallery ──
+const masonryGrid = document.getElementById('masonryGrid');
+const galleryImages = galleryIds.map(id => ({ id, caption: '' }));
+galleryIds.forEach((id, i) => {
+  const item = document.createElement('div');
+  item.className = 'masonry-item';
+  item.innerHTML = `
+    <img src="${thumb(id)}" alt="Portfolio photo" loading="lazy">
+    <div class="masonry-item-overlay"></div>
+    <div class="masonry-item-label">View</div>
+  `;
+  item.addEventListener('click', () => openLightbox(galleryImages, i));
+  masonryGrid.appendChild(item);
+});
+
+// ── build wedding grid ──
+const weddingGrid = document.getElementById('weddingGrid');
+const weddingImages = stolitzIds.map(id => ({ id, caption: 'Stolitz Wedding · April 2026' }));
+stolitzIds.forEach((id, i) => {
+  const cell = document.createElement('div');
+  // alternate landscape/portrait for visual rhythm
+  const isLandscape = [1, 6, 12, 18].includes(i);
+  cell.className = 'wedding-cell' + (isLandscape ? ' landscape' : '');
+  // span 2 for first hero image and a mid-point
+  if (i === 0 || i === 13) cell.classList.add('w-span2');
+  cell.innerHTML = `<img src="${thumb(id)}" alt="Stolitz Wedding shot ${i + 1}" loading="lazy">`;
+  cell.addEventListener('click', () => openLightbox(weddingImages, i));
+  weddingGrid.appendChild(cell);
+});
+
+// ── hero parallax bg: use JAX cover ──
+document.getElementById('heroBg').style.backgroundImage =
+  `url('${thumb('aa7f4d17-5d9f-43f5-903b-8cbd4c5ebda9')}')`;
+</script>
