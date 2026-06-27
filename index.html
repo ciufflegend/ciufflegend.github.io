@@ -63,7 +63,7 @@ body {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('http://192.168.1.162:2283/api/assets/aa7f4d17-5d9f-43f5-903b-8cbd4c5ebda9/thumbnail?size=preview');
+  background-image: url('photos/aa7f4d17-5d9f-43f5-903b-8cbd4c5ebda9.jpg');
   background-size: cover;
   background-position: center top;
   filter: saturate(0.7) brightness(0.45);
@@ -542,12 +542,7 @@ body {
 </div>
 
 <script>
-const BASE = 'http://192.168.1.162:2283';
-const API_KEY = 'J5Ni8vTRSTXud9hcIXoDUkUYmorb4pOvBJHjRGHkM';
-
-function thumb(id) { return `${BASE}/api/assets/${id}/thumbnail?size=preview`; }
-function fullUrl(id) { return `${BASE}/api/assets/${id}/original`; }
-function immichUrl(id) { return `${BASE}/photos/${id}`; }
+function thumb(id) { return `photos/${id}.jpg`; }
 
 // ── data ──
 const named = [
@@ -749,7 +744,6 @@ stolitzIds.forEach((id, i) => {
   weddingGrid.appendChild(cell);
 });
 
-// ── hero parallax bg: use JAX cover ──
 document.getElementById('heroBg').style.backgroundImage =
-  `url('${thumb('aa7f4d17-5d9f-43f5-903b-8cbd4c5ebda9')}')`;
+  `url('photos/aa7f4d17-5d9f-43f5-903b-8cbd4c5ebda9.jpg')`;
 </script>
