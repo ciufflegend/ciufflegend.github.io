@@ -305,6 +305,42 @@ body {
 }
 .masonry-item:hover .masonry-item-label { opacity: 1; }
 
+/* ── TADC collab ── */
+.tadc-section { background: var(--ink-mid); }
+.tadc-desc {
+  font-family: system-ui, sans-serif;
+  font-size: 0.95rem;
+  color: var(--silver);
+  line-height: 1.75;
+  margin-bottom: 2rem;
+  max-width: 55ch;
+}
+.tadc-desc strong { color: var(--white); font-weight: 600; }
+.tadc-desc em { color: var(--accent); font-style: italic; }
+.tadc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+@media (max-width: 640px) { .tadc-grid { grid-template-columns: repeat(2, 1fr); } }
+.tadc-cell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.tadc-cell img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+  transition: transform 0.45s ease, filter 0.3s;
+  filter: saturate(0.85);
+}
+.tadc-cell:first-child { grid-column: span 2; }
+.tadc-cell:first-child img { aspect-ratio: 16/9; }
+.tadc-cell:hover img { transform: scale(1.04); filter: saturate(1.1); }
+
 /* ── Stolitz Wedding — dedicated section ── */
 .wedding-section {
   background: var(--ink);
@@ -520,6 +556,7 @@ body {
     <div class="nav-links">
       <a href="#characters">Characters</a>
       <a href="#gallery">Gallery</a>
+      <a href="#tadc">Digital Circus</a>
       <a href="#stolitz">Stolitz Wedding</a>
     </div>
   </nav>
@@ -556,6 +593,17 @@ body {
     <span class="label-silver">selected shots</span>
   </div>
   <div class="masonry" id="masonryGrid"></div>
+</section>
+
+<!-- TADC COLLAB -->
+<section class="tadc-section section" id="tadc">
+  <div class="section-header">
+    <h2 class="section-title">The Amazing Digital Circus</h2>
+    <div class="section-rule"></div>
+    <span class="label-silver">collab with Notorious Cinema</span>
+  </div>
+  <p class="tadc-desc">On-location collab with <strong>Notorious Cinema</strong> for the Italian release of <em>The Amazing Digital Circus: The Final Act</em>.</p>
+  <div class="tadc-grid" id="tadcGrid"></div>
 </section>
 
 <!-- STOLITZ WEDDING -->
@@ -806,6 +854,28 @@ galleryIds.forEach((id, i) => {
   `;
   item.addEventListener('click', () => openLightbox(galleryImages, i));
   masonryGrid.appendChild(item);
+});
+
+// ── build TADC grid ──
+const tadcIds = [
+  '6b906d79-9e4d-438c-9c0f-182b2405560f',
+  'f2ff659f-d1fc-4afe-962a-d1293cf4e525',
+  'cf478566-1530-4088-926c-7a8cd73c9312',
+  '89401b97-e2a6-481b-b2d8-0379d7d1ebf5',
+  'b2902e0d-4daf-463a-89be-f555fd64b737',
+  '988ccc1b-794a-4fba-9878-e31869bd3aa6',
+  'b50fb804-d8bc-4d07-b043-78a8d6eb6d68',
+  'b41837c7-62fd-42ff-9e3a-40bde0fad01e',
+  '0b56dc28-3812-420e-b612-0c24c7fa43c0',
+];
+const tadcImages = tadcIds.map(id => ({ id, caption: 'TADC: The Final Act · Notorious Cinema collab' }));
+const tadcGrid = document.getElementById('tadcGrid');
+tadcIds.forEach((id, i) => {
+  const cell = document.createElement('div');
+  cell.className = 'tadc-cell';
+  cell.innerHTML = `<img src="${thumb(id)}" alt="TADC collab photo ${i + 1}" loading="lazy">`;
+  cell.addEventListener('click', () => openLightbox(tadcImages, i));
+  tadcGrid.appendChild(cell);
 });
 
 // ── build wedding grid ──
