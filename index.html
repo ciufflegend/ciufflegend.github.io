@@ -468,6 +468,26 @@ body {
   white-space: nowrap;
 }
 
+/* ── back to top ── */
+.back-to-top {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 0.6rem 1.4rem;
+  font-family: system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--silver-dim);
+  text-decoration: none;
+  border: 1px solid var(--accent-dim);
+  border-radius: 2px;
+  transition: color 0.2s, border-color 0.2s;
+  margin-bottom: 2rem;
+}
+.back-to-top:hover { color: var(--white); border-color: var(--silver); }
+
 /* ── footer ── */
 .footer {
   background: var(--ink);
@@ -575,6 +595,7 @@ body {
 </section>
 
 <!-- FOOTER -->
+<a href="#" class="back-to-top">↑ Back to top</a>
 <footer class="footer">
   <div>
     <div class="footer-name">Daniel</div>
